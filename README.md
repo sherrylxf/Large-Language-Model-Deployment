@@ -56,7 +56,6 @@
 | ---------------- | ----- | ----- | ----- | ----- | -------- | ------------ |
 | **Qwen-7B-Chat** | ★★★★☆ | ★★★★☆ | ★★★☆☆ | ★★★★☆ | 中（CPU部署） | 有中国特色表达      |
 | **ChatGLM3-6B**  | ★★★☆☆ | ★★★☆☆ | ★★★☆☆ | ★★★☆☆ | 中（CPU部署） | 输出偏短，表达中规中矩  |
-| **Baichuan2-7B** | ★★★★☆ | ★★★★☆ | ★★☆☆☆ | ★★★★☆ | 中（CPU部署） | 回答严谨但不幽默     |
 | **ChatGPT-4o**   | ★★★★★ | ★★★★★ | ★★★★★ | ★★★★★ | 快（云端API） | 表达自然，具有幽默与逻辑 |
 
 ---
@@ -103,7 +102,6 @@ llm-deploy-comparison/
 
 * [Qwen by Alibaba](https://www.modelscope.cn/qwen/Qwen-7B-Chat)
 * [ChatGLM3 by ZhipuAI](https://www.modelscope.cn/ZhipuAI/chatglm3-6b)
-* [Baichuan2 by Baichuan Inc](https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base)
 * [ChatGPT-4o by OpenAI](https://chat.openai.com)
 
 ---
