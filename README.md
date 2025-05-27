@@ -34,10 +34,11 @@
 
 * ChatGLM3 输出示例
 
+![问题1.png](%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94ChatGLM3/%E9%97%AE%E9%A2%981.png)
 
 * ChatGPT-4o 网页回答截图
 
-![问题1.png](%E7%AC%AC%E5%9B%9B%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94Chatgpt4o/%E9%97%AE%E9%A2%981.png)
+![问题1.png](%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94Chatgpt4o/%E9%97%AE%E9%A2%981.png)
 
 ---
 
