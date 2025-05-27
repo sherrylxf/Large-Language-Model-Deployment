@@ -1,140 +1,120 @@
+# 大语言模型部署体验项目
 
-
-## 大模型部署实践
-
----
-
-### 一、下载大模型到本地
-
-#### 1. 切换目录到 `/mnt/data`
-
-```bash
-cd /mnt/data
-```
-
-#### 2. 下载一个大模型
-
-```bash
-# 只下载一个模型，避免存储不足
-git clone https://www.modelscope.cn/qwen/Qwen-7B-Chat.git
-```
-
+本项目旨在探索多种主流大语言模型的本地部署过程，并进行统一问答测试与横向性能对比，帮助理解不同模型的风格、响应速度和推理能力差异。
 
 ---
 
-###  二、安装模型运行所需依赖
+## 本项目部署的四个模型：
 
-在 `/mnt/workspace` 目录下执行以下命令：
-
-```bash
-cd /mnt/workspace
-
-# 用虚拟环境以避免依赖冲突
-python -m venv venv
-source venv/bin/activate
-pip install -U pip setuptools wheel
-apt update && apt install nano -y
-
-# 安装 transformers 4.33.3 和其他依赖
-pip install \
-  intel-extension-for-transformers==1.4.2 \
-  neural-compressor==2.5 \
-  transformers==4.33.3 \
-  modelscope==1.9.5 \
-  pydantic==1.10.13
-```
+| 序号 | 模型名称              | 来源 / 获取方式                                                                | 部署说明            |
+| -- | ----------------- | ------------------------------------------------------------------------ | --------------- |
+| 1  | Qwen-7B-Chat      | `git clone https://www.modelscope.cn/qwen/Qwen-7B-Chat.git`              | 魔搭 CPU 部署完成     |
+| 2  | ChatGLM3-6B       | `git clone https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git`            | 魔搭 CPU 部署完成     |
+| 3  | Baichuan2-7B-Base | `git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base.git` | 魔搭 CPU 部署完成 |
+| 4  | ChatGPT-4o        | 在线使用（[https://chat.openai.com/）](https://chat.openai.com/）)              | 免部署，网页交互即可      |
 
 ---
 
-### 三、编写运行脚本 `run_qwen_cpu.py`
+## 部署过程（详细部署教程见：Tutorial.md）
 
-#### 在 `/mnt/workspace` 目录下，新建一个 Python 文件：
+> 📸 以下为各模型的部署或运行截图（替换为你的实际图片路径）：
 
-```bash
-nano run_qwen_cpu.py
+### ✅ 模型克隆与加载
 
-cat > run_qwen_cpu.py
-```
+* Qwen 克隆成功
+![模型部署完成.png](%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%88%90.png)
 
-#### run_qwen_cpu.py ：
+* ChatGLM3 克隆成功
+![模型部署完成.png](%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94ChatGLM3/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%88%90.png)
 
-```python
-from transformers import AutoTokenizer, AutoModelForCausalLM
+* Baichuan 克隆成功
 
-# 模型路径（使用你刚刚下载的模型）
-model_path = "/mnt/data/Qwen-7B-Chat"
 
-# 加载 tokenizer 和模型
-tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True)
+### ✅ 本地运行与输出示例
 
-# 将模型设置为 evaluation 模式（关闭 Dropout）
-model.eval()
+* Qwen 输出示例
+![问题1.png](%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE/%E9%97%AE%E9%A2%981.png)
 
-# 输入一个提示词进行推理
-prompt = "你好，请介绍一下你自己。"
-inputs = tokenizer(prompt, return_tensors="pt")
+* ChatGLM3 输出示例
 
-# 前向推理
-with torch.no_grad():
-    outputs = model.generate(**inputs, max_new_tokens=100)
 
-# 输出结果
-response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-print(response)
-```
+* Baichuan 输出示例
 
-按下 `Ctrl + O` 保存，`Enter` 确认，`Ctrl + X` 退出编辑器。
+
+* ChatGPT-4o 网页回答截图
+![问题1.png](%E7%AC%AC%E5%9B%9B%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94Chatgpt4o/%E9%97%AE%E9%A2%981.png)
 
 ---
 
-### 四、运行模型脚本
+## 问答横向对比分析（详细见文档：）
 
-在终端执行：
+我们选取了一组具有代表性的问题，在四个模型上进行统一测试，分析它们在以下方面的表现：
 
-```bash
-python run_qwen_cpu.py
-```
+### 统一测试问题
 
-如果你安装了 `torch`，这时就会开始生成回答。
+> **示例问题：**
+> “请说出以下两句话的区别：1、冬天：能穿多少穿多少；2、夏天：能穿多少穿多少。”
+
+### 回答效果对比表
+
+| 模型名称             | 语言理解  | 回答逻辑  | 幽默感   | 输出流畅性 | 响应速度     | 备注           |
+| ---------------- | ----- | ----- | ----- | ----- | -------- | ------------ |
+| **Qwen-7B-Chat** | ★★★★☆ | ★★★★☆ | ★★★☆☆ | ★★★★☆ | 中（CPU部署） | 有中国特色表达      |
+| **ChatGLM3-6B**  | ★★★☆☆ | ★★★☆☆ | ★★★☆☆ | ★★★☆☆ | 中（CPU部署） | 输出偏短，表达中规中矩  |
+| **Baichuan2-7B** | ★★★★☆ | ★★★★☆ | ★★☆☆☆ | ★★★★☆ | 中（CPU部署） | 回答严谨但不幽默     |
+| **ChatGPT-4o**   | ★★★★★ | ★★★★★ | ★★★★★ | ★★★★★ | 快（云端API） | 表达自然，具有幽默与逻辑 |
 
 ---
 
+## 总结体会
 
-### ✅ Bonus：使用 `modelscope` 下载和加载模型（自动下载权重）
+* **部署难度**：国产模型部署流程类似，均可使用 `transformers` 加载，但在 CPU 上加载较慢。
+* **响应速度**：本地 CPU 模型响应延迟在 5\~10 秒左右，ChatGPT-4o 在线响应最流畅。
+* **回答风格**：
 
-如果你更喜欢自动化方式，也可以这样写 `run_qwen_cpu.py`：
+  * Qwen 偏向生活化表达；
+  * ChatGLM3 更技术直给；
+  * Baichuan 严谨保守；
+  * GPT-4o 更具创造性与亲和力。
 
-```python
-from modelscope import AutoModelForCausalLM, AutoTokenizer
-from modelscope.utils.constant import Tasks
+---
 
-model = AutoModelForCausalLM.from_pretrained('qwen/Qwen-7B-Chat', task=Tasks.text_generation)
-tokenizer = AutoTokenizer.from_pretrained('qwen/Qwen-7B-Chat', revision='v1.0.4')
+## 项目结构
 
-input_text = "你好，介绍一下你自己"
-inputs = tokenizer(input_text, return_tensors="pt")
-outputs = model.generate(**inputs, max_new_tokens=100)
-print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ```
-
-并运行：
-
-```bash
-python run_qwen_cpu.py
+llm-deploy-comparison/
+├── scripts/                    # 模型运行脚本
+├── images/                     # 部署与回答截图
+├── questions/                  # 测试题目集合
+├── run_qwen_cpu.py            # Qwen 运行示例脚本
+├── README.md                  # 项目说明文档
+└── ...
 ```
 
 ---
 
-## ✅ 总结（你只需记住这几点）：
+## 可拓展方向
 
-| 步骤      | 命令示例                                    |
-| ------- | --------------------------------------- |
-| 1. 下载模型 | `cd /mnt/data && git clone https://...` |
-| 2. 安装依赖 | `pip install transformers==4.33.3 ...`  |
-| 3. 写脚本  | `nano run_qwen_cpu.py`                  |
-| 4. 运行模型 | `python run_qwen_cpu.py`                |
+* 增加 GPU 加速支持
+* 加入自动评分/BLEU/BERTScore 对比模块
+* 构建 Gradio 前端统一问答界面
+* 自动化运行与截图脚本收集系统
 
 ---
 
-如果你愿意，我也可以直接为你生成一个完整的 `run_all.sh` 脚本，一键完成安装、下载、推理流程。需要我帮你生成吗？
+## 鸣谢
+
+感谢以下模型与平台支持：
+
+* [Qwen by Alibaba](https://www.modelscope.cn/qwen/Qwen-7B-Chat)
+* [ChatGLM3 by ZhipuAI](https://www.modelscope.cn/ZhipuAI/chatglm3-6b)
+* [Baichuan2 by Baichuan Inc](https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base)
+* [ChatGPT-4o by OpenAI](https://chat.openai.com)
+
+---
+
+## 联系方式
+
+如需交流部署经验，或模型测试建议，欢迎通过 Issue 或邮箱联系我：`your_email@example.com`
+
+---
