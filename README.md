@@ -44,7 +44,7 @@
 
 ## 问答横向对比分析（详细见文档：[大语言模型之间的横向对比分析.md](%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E6%A8%AA%E5%90%91%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90.md)）
 
-我们选取了一组具有代表性的问题，在四个模型上进行统一测试，分析它们在以下方面的表现：
+我们选取了一组具有代表性的问题，在3个模型上进行统一测试，分析它们在以下方面的表现：
 
 ### 统一测试问题
 
@@ -69,32 +69,7 @@
 
   * Qwen 偏向生活化表达；
   * ChatGLM3 更技术直给；
-  * Baichuan 严谨保守；
   * GPT-4o 更具创造性与亲和力。
-
----
-
-## 项目结构
-
-```
-llm-deploy-comparison/
-├── scripts/                    # 模型运行脚本
-├── images/                     # 部署与回答截图
-├── questions/                  # 测试题目集合
-├── run_qwen_cpu.py            # Qwen 运行示例脚本
-├── README.md                  # 项目说明文档
-└── ...
-```
-
----
-
-## 可拓展方向
-
-* 增加 GPU 加速支持
-* 加入自动评分/BLEU/BERTScore 对比模块
-* 构建 Gradio 前端统一问答界面
-* 自动化运行与截图脚本收集系统
-
 ---
 
 ## 鸣谢
@@ -104,11 +79,5 @@ llm-deploy-comparison/
 * [Qwen by Alibaba](https://www.modelscope.cn/qwen/Qwen-7B-Chat)
 * [ChatGLM3 by ZhipuAI](https://www.modelscope.cn/ZhipuAI/chatglm3-6b)
 * [ChatGPT-4o by OpenAI](https://chat.openai.com)
-
----
-
-## 联系方式
-
-如需交流部署经验，或模型测试建议，欢迎通过 Issue 或邮箱联系我：`your_email@example.com`
 
 ---
