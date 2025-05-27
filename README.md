@@ -42,6 +42,7 @@
 
 
 * ChatGPT-4o 网页回答截图
+
 ![问题1.png](%E7%AC%AC%E5%9B%9B%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94Chatgpt4o/%E9%97%AE%E9%A2%981.png)
 
 ---
