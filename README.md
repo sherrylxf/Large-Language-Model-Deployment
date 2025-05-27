@@ -4,14 +4,13 @@
 
 ---
 
-## 本项目部署的四个模型：
+## 本项目部署的三个模型：
 
 | 序号 | 模型名称              | 来源 / 获取方式                                                                | 部署说明            |
-| -- | ----------------- | ------------------------------------------------------------------------ | --------------- |
+|----| ----------------- | ------------------------------------------------------------------------ | --------------- |
 | 1  | Qwen-7B-Chat      | `git clone https://www.modelscope.cn/qwen/Qwen-7B-Chat.git`              | 魔搭 CPU 部署完成     |
-| 2  | ChatGLM3-6B       | `git clone https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git`            | 魔搭 CPU 部署完成     |
-| 3  | Baichuan2-7B-Base | `git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base.git` | 魔搭 CPU 部署完成 |
-| 4  | ChatGPT-4o        | 在线使用（[https://chat.openai.com/）](https://chat.openai.com/）)              | 免部署，网页交互即可      |
+| 2  | ChatGLM3-6B       | `git clone https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git`            | 魔搭 CPU 部署完成    
+| 3  | ChatGPT-4o        | 在线使用（[https://chat.openai.com/）](https://chat.openai.com/）)              | 免部署，网页交互即可      |
 
 ---
 
@@ -27,8 +26,6 @@
 * ChatGLM3 克隆成功
 ![模型部署完成.png](%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94ChatGLM3/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%88%90.png)
 
-* Baichuan 克隆成功
-
 
 ### ✅ 本地运行与输出示例
 
@@ -36,9 +33,6 @@
 ![问题1.png](%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%E2%80%94%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE/%E9%97%AE%E9%A2%981.png)
 
 * ChatGLM3 输出示例
-
-
-* Baichuan 输出示例
 
 
 * ChatGPT-4o 网页回答截图
